@@ -10,7 +10,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-[url(/images/footer-bg.jpg)] bg-cover bg-bottom min-h-[60vh] md:h-[140vh] -mt-20 md:-mt-80 pt-0 pb-8 md:py-12 px-5 md:px-8 relative overflow-hidden flex flex-col justify-between items-end">
+    <footer className="w-full bg-[url(/images/footer-bg.jpg)] bg-cover bg-bottom min-h-[60vh] md:h-[140vh] -mt-52 md:-mt-80 pt-0 pb-8 md:py-12 px-5 md:px-8 relative overflow-hidden flex flex-col justify-between items-end">
       <VideoCarousel />
 
       <div className="w-full max-w-[2200px] pt-6 md:pt-8 mx-auto flex flex-col md:flex-row justify-between items-center md:items-end relative z-10 border-t border-white gap-4 md:gap-0">

@@ -24,15 +24,15 @@ export default function VideoCarousel() {
   };
 
   return (
-    <div className="w-full relative flex flex-col items-center justify-center py-8 md:py-12 z-50">
+    <div className="w-full relative flex flex-col items-center justify-center py-16 z-50">
       {/* Main Carousel Area */}
-      <div className="relative w-full flex items-center justify-between px-3 sm:px-6 md:px-12">
+      <div className="relative w-full flex items-center justify-between md:px-12">
 
         {/* Left Control */}
         <button
           onClick={prevVideo}
           disabled={currentIndex === 0}
-          className="z-50 w-9 h-9 md:w-12 md:h-12 rounded-full border border-[#E6E8EB] flex items-center cursor-pointer justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+          className="z-50 w-6 h-6 md:w-12 md:h-12 rounded-full border border-[#E6E8EB] flex items-center cursor-pointer justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
         >
           <Image src="/icons/arrow-left.svg" width={12} height={7} alt="left arrow icon" className="md:w-[14px] md:h-[8px]" />
         </button>
@@ -96,7 +96,7 @@ export default function VideoCarousel() {
         <button
           onClick={nextVideo}
           disabled={currentIndex === videos.length - 1}
-          className="z-50 w-9 h-9 md:w-12 md:h-12 rounded-full border border-[#E6E8EB] flex items-center cursor-pointer justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
+          className="z-50 w-6 h-6 md:w-12 md:h-12 rounded-full border border-[#E6E8EB] flex items-center cursor-pointer justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed flex-shrink-0"
         >
           <Image src="/icons/arrow-right.svg" width={12} height={7} alt="right arrow icon" className="md:w-[14px] md:h-[8px]" />
         </button>

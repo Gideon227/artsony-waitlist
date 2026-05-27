@@ -1,21 +1,34 @@
-import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import { Resend } from 'resend';
+import { NextResponse } from 'next/server';
 import { waitlistSchema } from "@/lib/validation";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const WAITLIST_SEGMENT_ID = process.env.RESEND_SEGMENT_ID as string;
 
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const body = await request.json();
+    const body = await req.json();
+    
+    // Validate against the updated schema
     const validatedData = waitlistSchema.parse(body);
+    const { email, fullName, type, artFocus } = validatedData;
 
-    const { data, error } = await resend.emails.send({
-      from: "Artsony Waitlist <onboarding@resend.dev>", // Update with verified domain
-      to: ["gideonolaiya02@gmail.com"], // Your notification email
-      subject: `New Waitlist Signup: ${validatedData.type}`,
-      html: `<p><strong>Name:</strong> ${validatedData.fullName}</p>
-             <p><strong>Email:</strong> ${validatedData.email}</p>
-             <p><strong>Type:</strong> ${validatedData.type}</p>`,
+    // Split name for Resend's default fields
+    const [firstName, ...lastNameParts] = fullName.trim().split(" ");
+    const lastName = lastNameParts.join(" ");
+
+    const { data, error } = await resend.contacts.create({
+      email,
+      firstName,
+      lastName,
+      unsubscribed: false,
+      // Add to the "Waitlist" segment
+      segments: [{ id: WAITLIST_SEGMENT_ID }],
+      // Use the custom properties you created in the dashboard
+      properties: {
+        user_type: type,
+        art_focus: artFocus || "N/A",
+      },
     });
 
     if (error) {
@@ -24,6 +37,10 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ success: true, data });
   } catch (error: any) {
-    return NextResponse.json({ error: error.errors || "Invalid request" }, { status: 400 });
+    console.error("API Error:", error);
+    return NextResponse.json(
+      { error: error.errors?.[0]?.message || "Internal Server Error" }, 
+      { status: 500 }
+    );
   }
 }

@@ -92,7 +92,7 @@ export default function Waitlist() {
               w-full
               md:w-[878px]
               md:-ml-12
-              max-lg:-mt-4
+              max-lg:-mt-6
               lg:-ml-16
               rounded-3xl
               max-lg:rounded-t-none
