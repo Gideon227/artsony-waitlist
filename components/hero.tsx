@@ -1,8 +1,27 @@
+'use client'
 import Image from "next/image";
 
 export default function Hero() {
+  const handleScroll = () => {
+    const nextSection = document.getElementById("waitlist");
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <section className="w-full pt-8 flex flex-col items-center overflow-hidden min-h-[700px] lg:h-screen">
+      {/* Injecting a gentle custom bounce animation */}
+      <style jsx global>{`
+        @keyframes subtleBounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(8px); }
+        }
+        .animate-subtle-bounce {
+          animation: subtleBounce 2s infinite ease-in-out;
+        }
+      `}</style>
+
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero-image.png"
@@ -35,14 +54,35 @@ export default function Hero() {
         </p>
       </div>
 
-      {/* Scroll Down Pill */}
+      {/* Scroll Down Pill Button */}
       <div className="z-20 relative mt-8 md:mt-[60px] mb-16 md:mb-38">
-        <div className="w-[120px] h-[144px] lg:w-[160px] lg:h-[188px] rounded-full border border-white/50 flex flex-col items-center justify-center gap-2 bg-[#2B585A33]">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="lg:w-12 lg:h-12">
-            <path d="M12 4L12 20M12 20L6 14M12 20L18 14" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          <span className="text-white text-[12px] lg:text-[16px] leading-6 font-normal">Scroll Down</span>
-        </div>
+        <button
+          onClick={handleScroll}
+          className="w-[120px] h-[144px] lg:w-[160px] lg:h-[188px] border boder-white rounded-full flex flex-col items-center justify-center gap-3 bg-[#2B585A33] hover:bg-[#2b585a66] transition-all duration-300 cursor-pointer group"
+        >
+          {/* The Wrapper handles the continuous smooth bounce */}
+          <div className="animate-subtle-bounce flex flex-col items-center gap-2">
+            <svg 
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="lg:w-12 lg:h-12 transform group-hover:scale-110 transition-transform duration-300"
+            >
+              <path 
+                d="M12 4L12 20M12 20L6 14M12 20L18 14" 
+                stroke="white" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span className="text-white text-[12px] lg:text-[16px] leading-6 font-normal tracking-wide">
+              Scroll Down
+            </span>
+          </div>
+        </button>
       </div>
 
       {/* Top decorative icon — hidden on mobile */}

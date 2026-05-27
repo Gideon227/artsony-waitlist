@@ -40,7 +40,7 @@ export default function Waitlist() {
 
         {/* Heading + Toggle */}
         <div className="flex flex-col gap-6 md:gap-12 w-full items-center">
-          <div className="flex flex-col gap-5 md:gap-8 items-center justify-center w-full">
+          <div id="waitlist" className="flex flex-col gap-5 md:gap-8 items-center justify-center w-full">
             <h2 className="font-raleway font-medium text-[28px] leading-9 md:text-[64px] md:leading-18 tracking-wide text-center">
               Join the Waitlist
             </h2>
